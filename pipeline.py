@@ -3,18 +3,19 @@ import numpy as np
 import torch
 import configparser
 from torchvision.transforms import ToTensor
-from utils.utils import ImageToTensor, xywh2xyxy, get_most_confident_bbox, transform_bbox_coords
+from .utils.utils import ImageToTensor, xywh2xyxy, get_most_confident_bbox, transform_bbox_coords
 
 
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-DETECTION_SIZE = config['Constants']['detection_size']
-CLASSIFICATION_SIZE = config['Constants']['classification_size']
-DETECTION_THRESHOLD = config['Constants']['detection_threshold']
-GRID_SIZE = config['Constants']['grid_size']
-
-EMOTIONS_LIST = config['Emotions']['emotions']
+DETECTION_SIZE = tuple(map(int, config['Constants']['detection_size'].split()))
+#DETECTION_SIZE = (288, 288)
+CLASSIFICATION_SIZE = tuple(map(int, config['Constants']['classification_size'].split()))
+DETECTION_THRESHOLD = float(config['Constants']['detection_threshold'])
+GRID_SIZE = int(config['Constants']['grid_size'])
+#GRID_SIZE = 9
+EMOTIONS_LIST = config['Emotions']['emotions'].split()
 
 
 def stream_prediction(image, detection_model, classification_model):

@@ -14,7 +14,7 @@ from .camera_opencv import Camera
 # from camera_pi import Camera
 
 app = Flask(__name__)
-
+TEMPLATES_AUTO_RELOAD = True
 
 @app.route('/')
 def index():
@@ -44,4 +44,4 @@ def handle_static(location):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True, debug=True)
+    app.run(host='0.0.0.0', threaded=True) #, debug=True)

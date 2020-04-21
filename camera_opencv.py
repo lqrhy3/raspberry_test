@@ -1,5 +1,5 @@
-from base_camera import BaseCamera
-from pipeline import stream_prediction
+from .base_camera import BaseCamera
+from .pipeline import stream_prediction
 import cv2
 import torch
 import os
@@ -10,8 +10,8 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 
-PATH_TO_DETECTION_MODEL = config['path_to_models']['detection_model']
-PATH_TO_CLASSIFICATION_MODEL = config['path_to_models']['recognition_model']
+PATH_TO_DETECTION_MODEL = config['Path_to_models']['detection_model']
+PATH_TO_CLASSIFICATION_MODEL = config['Path_to_models']['recognition_model']
 
 torch.backends.quantized.engine = 'qnnpack'
 detection_model = torch.jit.load(os.path.join(PATH_TO_DETECTION_MODEL, 'model_quantized.pt'))
